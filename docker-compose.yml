@@ -1,0 +1,16 @@
+logstash_config:
+  image: gallna/logstash-docker-volume
+  command: /data/run.sh
+  environment:
+    AWS_KEY: "key"
+    AWS_SECRET: "secret"
+    ES_HOST: elasticsearch
+    ES_PORT: 9200
+    S3_BUCKET: "bucket"
+    S3_PREFIX: "prefix"
+
+logstash:
+  image: logstash
+  command: "logstash -f /data/build.conf"
+  volumes_from:
+    - logstash_config
