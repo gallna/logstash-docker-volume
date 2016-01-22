@@ -12,4 +12,5 @@ ELB_ACCESS_LOG %{TIMESTAMP_ISO8601:timestamp} %{NOTSPACE:elb} %{IP:clientip}:%{I
 
 EB_ACCESS %{IP:host} \(%{IPV4:userIp}(, %{IPV4:cloudFront})?\) %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} %{NUMBER:bytes}(?: "(?:%{DATA:referer})"|-) "%{DATA:useragent}"
 
-CLOUDWATCH_ACCESS %{URIHOST:host} \((?:unknown|-)?(?:, )?%{IP:clientIp}?((?:, )?%{DATA:x_forwarded_for})?\) %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} (?:-|%{NUMBER:bytes})( "(?:-|%{DATA:referer}))" ("(?:-|%{DATA:agent})")
+CLOUDWATCH_ACCESS %{URIHOST:host} \((?:unknown|-)?(?:, )?%{IP:clientIp}?((?:, )?%{DATA:x_forwarded_for})?\) (%{USER:ident}|%{DATA:ident}) (%{USER:auth}|%{DATA:auth}) \[%{HTTPDATE:timestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} (?:-|%{NUMBER:bytes})( "(?:-|%{DATA:referer}))" ("(?:-|%{DATA:agent})")
+
